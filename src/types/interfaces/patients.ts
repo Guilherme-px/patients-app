@@ -26,3 +26,9 @@ export interface IPatientFormProps {
     patient?: IPatient;
     setOpen: Function;
 }
+
+export interface IDeleteDialogProps {
+    isOpen: boolean;
+    setDialog: Function;
+    id: string;
+}

@@ -6,9 +6,11 @@ import { IPatientProps } from '../../types/interfaces/patients';
 import PatientForm from '../forms/PatientForm';
 import Modal from '@mui/material/Modal';
 import styles from '../../assets/sass/button.module.sass';
+import DeletePatientDialog from '../dialogs/DeletePatientDialog';
 
 const PatientTableRow = ({ patient }: IPatientProps) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenModal, setOpenModal] = useState(false);
+    const [isOpenDialog, setIsOpenDialog] = useState(false);
 
     return (
         <>
@@ -24,11 +26,11 @@ const PatientTableRow = ({ patient }: IPatientProps) => {
                 <TableCell>{patient.address.streetNumber}</TableCell>
                 <TableCell>
                     <div style={{ display: 'flex' }}>
-                        <Button onClick={() => setIsOpen(true)}>
+                        <Button onClick={() => setOpenModal(true)}>
                             <EditIcon></EditIcon>
                         </Button>
 
-                        <Button>
+                        <Button onClick={() => setIsOpenDialog(true)}>
                             <DeleteIcon style={{ fill: 'red' }}></DeleteIcon>
                         </Button>
                     </div>
@@ -37,13 +39,19 @@ const PatientTableRow = ({ patient }: IPatientProps) => {
 
             <Modal
                 className={styles.form_modal}
-                open={isOpen}
-                onClose={() => setIsOpen(false)}
+                open={isOpenModal}
+                onClose={() => setOpenModal(false)}
             >
                 <>
-                    <PatientForm setOpen={setIsOpen} patient={patient} />
+                    <PatientForm setOpen={setOpenModal} patient={patient} />
                 </>
             </Modal>
+
+            <DeletePatientDialog
+                isOpen={isOpenDialog}
+                setDialog={setIsOpenDialog}
+                id={patient.id!}
+            />
         </>
     );
 };
