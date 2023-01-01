@@ -13,9 +13,13 @@ import {
 import states from '../../utils/states';
 import { useFormik } from 'formik';
 import validations from '../../utils/validations';
+import { useDispatch } from 'react-redux';
 import '../../assets/sass/patientsForm.sass';
+import createPatient from '../../services/createPatient';
 
-const PatientForm = () => {
+const PatientForm = (setOpen: any) => {
+    const dispatch = useDispatch();
+
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -30,7 +34,23 @@ const PatientForm = () => {
         },
         validationSchema: validations,
         onSubmit: async (values) => {
-            console.log(values);
+            createPatient(
+                {
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                    email: values.email,
+                    birthday: values.birthday,
+                    gender: values.gender,
+                    address: {
+                        street: values.street,
+                        streetNumber: Number(values.streetNumber),
+                        city: values.city,
+                        state: values.state,
+                    },
+                },
+                dispatch
+            );
+            return setOpen(false);
         },
     });
 

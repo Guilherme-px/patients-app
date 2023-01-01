@@ -49,7 +49,7 @@ const Dashboard = () => {
                         onClose={() => setIsOpen(false)}
                     >
                         <>
-                            <PatientForm />
+                            <PatientForm setOpen={setIsOpen} />
                         </>
                     </Modal>
                 </>
