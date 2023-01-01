@@ -6,6 +6,7 @@ import { RootState } from '../store/store';
 import { Box } from '@mui/system';
 import { CircularProgress } from '@mui/material';
 import PatientsTable from '../components/table/PatientsTable';
+import PatientForm from '../components/forms/PatientForm';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const Dashboard = () => {
                     </div>
 
                     <PatientsTable />
+                    <PatientForm />
                 </>
             )}
         </main>

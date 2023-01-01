@@ -1,0 +1,29 @@
+@import './variables'
+
+.patient_form
+    padding: 3em
+    display: grid
+    grid-template-columns: 1fr
+    gap: 1em 0.5em
+    background: $color-white
+    width: 80%
+    margin: 0 auto
+    border-radius: 8px
+
+@media (min-width: 780px)
+    .patient_form
+        grid-template-columns: repeat(6, 1fr)
+    .firstName_input,
+    .lastName_input,
+    .birthday_input
+        grid-column: span 6
+    .email_input,
+    .gender_input,
+    .street_input
+        grid-column: span 2
+    .city_input,
+    .number_input,
+    .state_input
+        grid-column: span 2
+    .submit_button
+        grid-column: span 6
