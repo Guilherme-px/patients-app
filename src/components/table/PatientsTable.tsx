@@ -24,7 +24,7 @@ const Thead = styled(TableRow)`
     }
 `;
 
-const PatientsTable = ({ setIsOpen }: any) => {
+const PatientsTable = () => {
     const [page, setPage] = useState(0);
     const rowsPerPage = 5;
 
