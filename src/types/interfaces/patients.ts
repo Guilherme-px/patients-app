@@ -17,3 +17,7 @@ export interface IPatientState {
     loading: boolean;
     patients: IPatient[];
 }
+
+export interface IPatientProps {
+    patient: IPatient;
+}

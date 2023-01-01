@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/store';
 import { Box } from '@mui/system';
 import { CircularProgress } from '@mui/material';
+import PatientsTable from '../components/table/PatientsTable';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -27,9 +28,15 @@ const Dashboard = () => {
                     <CircularProgress />
                 </Box>
             ) : (
-                <div className={styles.button_content}>
-                    <button className={styles.button_add}>Novo paciente</button>
-                </div>
+                <>
+                    <div className={styles.button_content}>
+                        <button className={styles.button_add}>
+                            Novo paciente
+                        </button>
+                    </div>
+
+                    <PatientsTable />
+                </>
             )}
         </main>
     );
