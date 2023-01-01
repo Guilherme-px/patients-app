@@ -3,14 +3,12 @@ import api from './axios';
 import getPatients from './getPatients';
 
 const createPatient = async (patient: IPatient, dispatch: Function) => {
-    console.log(patient);
     await api
         .post('/patients', patient)
-        .then(() => {
+        .then((res) => {
             getPatients(dispatch);
         })
         .catch((err) => {
-            console.log(err);
             return err;
         });
 };

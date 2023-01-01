@@ -6,7 +6,6 @@ const getPatients = async (dispatch: Function) => {
 
     try {
         const { data } = await api.get('/patients');
-        console.log(data);
 
         dispatch(setPatients(data));
     } catch (err) {
