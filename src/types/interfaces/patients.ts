@@ -21,3 +21,8 @@ export interface IPatientState {
 export interface IPatientProps {
     patient: IPatient;
 }
+
+export interface IPatientFormProps {
+    patient?: IPatient;
+    setOpen: Function;
+}

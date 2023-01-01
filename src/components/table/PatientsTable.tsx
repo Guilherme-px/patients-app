@@ -61,7 +61,10 @@ const PatientsTable = ({ setIsOpen }: any) => {
                                 page * rowsPerPage + rowsPerPage
                             )
                             .map((patient) => (
-                                <PatientTableRow patient={patient} />
+                                <PatientTableRow
+                                    key={patient.id}
+                                    patient={patient}
+                                />
                             ))}
                     </TableBody>
                 </Table>

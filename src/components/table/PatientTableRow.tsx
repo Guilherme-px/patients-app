@@ -1,9 +1,15 @@
+import { useState } from 'react';
 import { Button, TableCell, TableRow } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IPatientProps } from '../../types/interfaces/patients';
+import PatientForm from '../forms/PatientForm';
+import Modal from '@mui/material/Modal';
+import styles from '../../assets/sass/button.module.sass';
 
 const PatientTableRow = ({ patient }: IPatientProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <>
             <TableRow>
@@ -18,7 +24,7 @@ const PatientTableRow = ({ patient }: IPatientProps) => {
                 <TableCell>{patient.address.streetNumber}</TableCell>
                 <TableCell>
                     <div style={{ display: 'flex' }}>
-                        <Button>
+                        <Button onClick={() => setIsOpen(true)}>
                             <EditIcon></EditIcon>
                         </Button>
 
@@ -28,6 +34,16 @@ const PatientTableRow = ({ patient }: IPatientProps) => {
                     </div>
                 </TableCell>
             </TableRow>
+
+            <Modal
+                className={styles.form_modal}
+                open={isOpen}
+                onClose={() => setIsOpen(false)}
+            >
+                <>
+                    <PatientForm setOpen={setIsOpen} patient={patient} />
+                </>
+            </Modal>
         </>
     );
 };

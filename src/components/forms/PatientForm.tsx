@@ -16,42 +16,66 @@ import validations from '../../utils/validations';
 import { useDispatch } from 'react-redux';
 import '../../assets/sass/patientsForm.sass';
 import createPatient from '../../services/createPatient';
-import { formatDate } from '../../utils/formatDate';
+import updatePatient from '../../services/updatePatient';
+import { formatDate, restoreDateFormat } from '../../utils/formatDate';
+import { IPatientFormProps } from '../../types/interfaces/patients';
 
-const PatientForm = (setOpen: any) => {
+const PatientForm = ({ setOpen, patient }: IPatientFormProps) => {
     const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
-            birthday: '',
-            gender: '',
-            street: '',
-            streetNumber: '',
-            city: '',
-            state: '',
+            firstName: patient?.firstName || '',
+            lastName: patient?.lastName || '',
+            email: patient?.email || '',
+            birthday: patient ? restoreDateFormat(patient?.birthday!) : '',
+            gender: patient?.gender || '',
+            street: patient?.address.street || '',
+            streetNumber: patient?.address.streetNumber || '',
+            city: patient?.address.city || '',
+            state: patient?.address.state || '',
         },
         validationSchema: validations,
         onSubmit: async (values) => {
-            createPatient(
-                {
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                    email: values.email,
-                    birthday: formatDate(values.birthday),
-                    gender: values.gender,
-                    address: {
-                        street: values.street,
-                        streetNumber: Number(values.streetNumber),
-                        city: values.city,
-                        state: values.state,
+            if (!patient) {
+                createPatient(
+                    {
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        email: values.email,
+                        birthday: formatDate(values.birthday),
+                        gender: values.gender,
+                        address: {
+                            street: values.street,
+                            streetNumber: Number(values.streetNumber),
+                            city: values.city,
+                            state: values.state,
+                        },
                     },
-                },
-                dispatch
-            );
-            return setOpen(false);
+                    dispatch
+                );
+                return setOpen(false);
+            } else {
+                updatePatient(
+                    {
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        email: values.email,
+                        birthday: formatDate(values.birthday),
+                        gender: values.gender,
+                        address: {
+                            street: values.street,
+                            streetNumber: Number(values.streetNumber),
+                            city: values.city,
+                            state: values.state,
+                        },
+                    },
+                    dispatch,
+                    patient.id!
+                );
+
+                return setOpen(false);
+            }
         },
     });
 
@@ -186,7 +210,7 @@ const PatientForm = (setOpen: any) => {
                 type="submit"
                 size="large"
             >
-                salvar
+                {!patient ? 'Salvar' : 'Editar'}
             </Button>
         </form>
     );
