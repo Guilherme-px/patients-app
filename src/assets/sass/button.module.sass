@@ -1,0 +1,30 @@
+@import './variables'
+
+.container
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    width: 80%
+    margin: 0 auto
+    margin-top: 50px
+    .button_content
+        display: flex
+        width: 100%
+        justify-content: flex-end
+        .button_add
+            display: flex
+            padding: 1.2em 2em
+            background-color: $color-blue
+            color: $color-white
+            border: none
+            border-radius: 8px
+            cursor: pointer
+            font-size: 1em
+            border: 1px solid $color-blue
+            &:hover
+                background-color: $color-white
+                color: $color-blue
+.modal
+    padding: 3em 0
+    overflow-y: scroll

@@ -1,5 +1,16 @@
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Dashboard from './views/Dashboard';
+
 const App = () => {
-    return <h1>medcloud</h1>;
+    return (
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                </Routes>
+            </BrowserRouter>
+        </>
+    );
 };
 
 export default App;
