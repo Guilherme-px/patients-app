@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../assets/sass/button.module.sass';
 import getPatients from '../services/getPatients';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,8 +7,10 @@ import { Box } from '@mui/system';
 import { CircularProgress } from '@mui/material';
 import PatientsTable from '../components/table/PatientsTable';
 import PatientForm from '../components/forms/PatientForm';
+import Modal from '@mui/material/Modal';
 
 const Dashboard = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
 
     const storeState = useSelector((state: RootState) => state.patient);
@@ -31,13 +33,25 @@ const Dashboard = () => {
             ) : (
                 <>
                     <div className={styles.button_content}>
-                        <button className={styles.button_add}>
+                        <button
+                            className={styles.button_add}
+                            onClick={() => setIsOpen(true)}
+                        >
                             Novo paciente
                         </button>
                     </div>
 
                     <PatientsTable />
-                    <PatientForm />
+
+                    <Modal
+                        className={styles.form_modal}
+                        open={isOpen}
+                        onClose={() => setIsOpen(false)}
+                    >
+                        <>
+                            <PatientForm />
+                        </>
+                    </Modal>
                 </>
             )}
         </main>
