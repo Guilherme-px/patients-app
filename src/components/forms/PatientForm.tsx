@@ -16,6 +16,7 @@ import validations from '../../utils/validations';
 import { useDispatch } from 'react-redux';
 import '../../assets/sass/patientsForm.sass';
 import createPatient from '../../services/createPatient';
+import { formatDate } from '../../utils/formatDate';
 
 const PatientForm = (setOpen: any) => {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const PatientForm = (setOpen: any) => {
                     firstName: values.firstName,
                     lastName: values.lastName,
                     email: values.email,
-                    birthday: values.birthday,
+                    birthday: formatDate(values.birthday),
                     gender: values.gender,
                     address: {
                         street: values.street,
