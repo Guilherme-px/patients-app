@@ -135,6 +135,11 @@ const PatientForm = ({ setOpen, patient }: IPatientFormProps) => {
                         control={<Radio />}
                         label="Feminino"
                     />
+                    <FormControlLabel
+                        value="Outro"
+                        control={<Radio />}
+                        label="Outro"
+                    />
                 </RadioGroup>
                 {touched.gender && errors.gender && (
                     <FormHelperText
