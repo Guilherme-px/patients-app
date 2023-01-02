@@ -13,7 +13,11 @@ const validations = yup.object({
         .string()
         .email('Este email não é valido!')
         .required('Informe o email!'),
-    birthday: yup.date().required('Informe a data de nascimento!'),
+    birthday: yup
+        .date()
+        .min(new Date(1900, 1, 1), 'Data inválida!')
+        .max(new Date(Date.now()), 'Data inválida!')
+        .required('Informe a data de nascimento!'),
     gender: yup.string().required('Selecione um gênero!'),
     street: yup.string().required('Informe o nome da rua!'),
     streetNumber: yup
