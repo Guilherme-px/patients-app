@@ -1,4 +1,4 @@
-# Frontend do teste para dev fullstack medcloud
+# Aplicação para agendamentos medicos (projeto em desenvolvimento)
 
 ## Configurando endereço http da API
 
